@@ -14,7 +14,9 @@
   "type": "module",
   "dependencies": {
     "cors": "^2.8.6",
+    "date-fns": "^4.4.0",
     "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
     "logger": "^1.0.0",
     "shared-types": "^1.0.0",
     "ts6-client": "^1.0.0",
@@ -23,6 +25,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/ws": "^8.18.1"
   }
 }
