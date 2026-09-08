@@ -36,3 +36,16 @@ export const env = {
     TS6_WEBQUERY_PORT: parseInt(parsed.TS6_WEBQUERY_PORT, 10),
     TS6_SERVER_ID: parseInt(parsed.TS6_SERVER_ID, 10),
 };
+
+export const config = {
+    port: env.PORT,
+    jwtSecret: env.JWT_SECRET,
+    corsOrigin: env.CORS_ORIGIN,
+    ts6Host: env.TS6_HOST,
+    ts6VoiceHost: env.TS6_VOICE_HOST,
+    ts6VoicePort: env.TS6_VOICE_PORT,
+    ts6ServerPassword: env.TS6_SERVER_PASSWORD,
+    ts6WebqueryPort: env.TS6_WEBQUERY_PORT,
+    ts6ApiKey: env.TS6_API_KEY,
+    ts6ServerId: env.TS6_SERVER_ID,
+};

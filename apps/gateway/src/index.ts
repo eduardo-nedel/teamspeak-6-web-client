@@ -5,6 +5,7 @@ import { env } from './config.js';
 import { authController } from './controllers/auth.controller.js';
 import { authGuard } from './middlewares/auth.guard.js';
 import { ts6Adapter } from './repositories/ts6.adapter.js';
+import { setupVoiceProxy } from './voice-proxy.js';
 
 const app = express();
 
@@ -68,6 +69,7 @@ app.get('/api/server-info', authGuard, async (req, res) => {
 
 const server = app.listen(env.PORT, () => {
     info(`Gateway control plane listening on port ${env.PORT}`);
+    setupVoiceProxy(server);
 });
 
 const GRACEFUL_SHUTDOWN_TIMEOUT = 15000;

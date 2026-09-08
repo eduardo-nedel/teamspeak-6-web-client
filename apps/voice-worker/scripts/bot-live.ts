@@ -2,11 +2,11 @@ import { Ts3Client } from 'ts6-client';
 import { generateIdentity } from 'ts6-client';
 import OpusScript from 'opusscript';
 
-const HOST = process.env.TS6_VOICE_HOST || '168.138.127.76';
-const PORT = parseInt(process.env.TS6_VOICE_PORT || '9987', 10);
-const PASSWORD = process.env.TS6_SERVER_PASSWORD || 'eiros';
-const NICKNAME = process.env.TS6_NICK || 'Antigravity_AI';
-const CHANNEL = process.env.TS6_CHANNEL || '1';
+const HOST = (process.env.TS6_VOICE_HOST || '168.138.127.76').trim();
+const PORT = parseInt((process.env.TS6_VOICE_PORT || '9987').trim(), 10);
+const PASSWORD = (process.env.TS6_SERVER_PASSWORD || 'eiros').trim();
+const NICKNAME = (process.env.TS6_NICK || 'Antigravity_AI').trim();
+const CHANNEL = (process.env.TS6_CHANNEL || '4').trim();
 
 console.log(`=================================================`);
 console.log(`🚀 Conectando Antigravity AI ao TeamSpeak 6...`);
