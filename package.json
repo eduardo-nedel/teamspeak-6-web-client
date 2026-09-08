@@ -1,0 +1,35 @@
+{
+  "name": "teamspeak-6-web-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eduardo-nedel/teamspeak-6-web-client.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/eduardo-nedel/teamspeak-6-web-client/issues"
+  },
+  "homepage": "https://github.com/eduardo-nedel/teamspeak-6-web-client#readme",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "private": "true",
+  "devDependencies": {
+    "@types/node": "^26.5.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2"
+  }
+}
