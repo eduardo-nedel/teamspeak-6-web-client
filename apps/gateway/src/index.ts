@@ -3,6 +3,8 @@ import cors from 'cors';
 import { info, error } from 'logger';
 import { env } from './config.js';
 import { authController } from './controllers/auth.controller.js';
+import { authGuard } from './middlewares/auth.guard.js';
+import { ts6Adapter } from './repositories/ts6.adapter.js';
 
 const app = express();
 
@@ -18,8 +20,51 @@ app.use((req, res, next) => {
     next();
 });
 
+// --- Rotas públicas ---
 app.get('/health', (req, res) => { res.json({ status: 'ok', uptime: process.uptime() }); });
 app.use('/api/auth', authController);
+
+// --- Rotas protegidas (precisam JWT) ---
+app.get('/api/channels', authGuard, async (req, res) => {
+    try {
+        const channels = await ts6Adapter.getChannels();
+        const clients = await ts6Adapter.getClients();
+
+        // Agrupa clientes por canal
+        const channelMap: Record<number, { channel: any; clients: any[] }> = {};
+        for (const ch of channels) {
+            channelMap[ch.cid] = { channel: ch, clients: [] };
+        }
+        for (const cl of clients) {
+            if (channelMap[cl.cid]) {
+                channelMap[cl.cid].clients.push(cl);
+            }
+        }
+
+        res.json({ code: 'SUCCESS', data: { channels, clients, channelMap } });
+    } catch (err: any) {
+        res.status(500).json({ code: 'INTERNAL_ERROR', message: err.message || 'Erro ao buscar canais' });
+    }
+});
+
+app.get('/api/server-info', authGuard, async (req, res) => {
+    try {
+        const channels = await ts6Adapter.getChannels();
+        const clients = await ts6Adapter.getClients();
+        res.json({
+            code: 'SUCCESS',
+            data: {
+                serverName: 'TeamSpeak 6 Web Client',
+                host: env.TS6_HOST,
+                totalChannels: channels.length,
+                totalClients: clients.length,
+                uptime: process.uptime(),
+            }
+        });
+    } catch (err: any) {
+        res.status(500).json({ code: 'INTERNAL_ERROR', message: err.message });
+    }
+});
 
 const server = app.listen(env.PORT, () => {
     info(`Gateway control plane listening on port ${env.PORT}`);

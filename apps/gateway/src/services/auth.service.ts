@@ -8,8 +8,8 @@ export class AuthService {
     
     public login(dto: LoginRequestDto) {
         // Stub: Em produção real isso validaria com um DB ou ActiveDirectory.
-        // Aqui mockamos login usando a senha "123" para todos os usuários stub.
-        if (dto.password !== '123') {
+        // Aqui mockamos login aceitando qualquer senha não vazia.
+        if (!dto.password || dto.password.length === 0) {
             return {
                 error: { code: 'UNAUTHORIZED', message: 'Credenciais inválidas.', retryable: false }
             };
