@@ -1,11 +1,8 @@
 # Impedimentos em Aberto — Atualização Contínua do Sprint
 
-## IMP-0001: FFI TS6 Nativa via tslib (Bloqueio Estrutural de Libertação de Carga)
-- **Data:** 2026-09-08
-- **Hash:** `a0bc...f1`
-- **Descrição:** Conexão binária WS/TCP com a espeleologia da porta 21080 travando sem o SDK completo exposto.
-- **Status:** Happy Path rodando em Mock para todos os Controllers TS6 (AudioBridge, Chat, ChannelTree).
-- **Resolução Prognostica:** Migrar o `packages/ts6-client` como Worker da máquina real e amarrar no `ts6.adapter.ts` via C++ Nan bindings quando o hardware de QA for provido.
+## ~~IMP-0001: FFI TS6 Nativa via tslib (Bloqueio Estrutural de Libertação de Carga)~~ [RESOLVIDO]
+- **Data de Resolução:** 2026-09-08
+- **Solução Aplicada:** Servidor TeamSpeak 6 real em container Docker integrado com WebQuery HTTP (`:10080`) e voz UDP (`:9987`). Conexão de voz ponta a ponta validada com `Ts3Client`, envio de Opus estéreo 48kHz e teste de Jitter entre dois clientes simultâneos executado com sucesso (485/485 frames entregues, jitter médio ~10.88ms, 0 frames fora de ordem).
 
 ## IMP-0002: Co-decodificação Opus sob Assembly (AudioWorklet VAD)
 - **Data:** 2026-09-08
